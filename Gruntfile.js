@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['test/**/*.js']
+        src: ['test/*.js']
       }
     },
 
@@ -20,15 +20,33 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      options: {
+        separator: ';'
+      },
+
+      dist: {
+        src: [
+          'public/**/*.js'
+        ],
+        dest: 'build/production.js'
+      }
+    },
+
     uglify: {
+      build: {
+        files: {
+          'build/production.min.js': ['build/production.js']
+        }
+      }
     },
 
     jshint: {
       files: [
-        // Add filespec list here
+        'public/client/*.js'
       ],
       options: {
-        force: 'true',
+        force: 'false',
         jshintrc: '.jshintrc',
         ignores: [
           'public/lib/**/*.js',
@@ -37,8 +55,12 @@ module.exports = function(grunt) {
       }
     },
 
-    cssmin: {
-        // Add filespec list here
+    cssmin : {
+      build: {
+        files: {
+          'style.css' : 'public/style.css'
+        }
+      }
     },
 
     watch: {
@@ -91,10 +113,14 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
+    'jshint',
     'mochaTest'
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    'uglify',
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -107,6 +133,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       // add your production server task here
+      // grunt.task.run([ 'test' ]);
   ]);
 
 
