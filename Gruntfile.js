@@ -28,7 +28,12 @@ module.exports = function(grunt) {
           'public/lib/jquery.js',
           'public/lib/underscore.js',
           'public/lib/backbone.js',
-          'public/lib/handlebars.js',
+          'public/lib/handlebars.js'
+        ],
+        dest: 'public/dist/dependencies.js'
+      },
+      dep: {
+        src: [
           'public/client/*.js'
         ],
         dest: 'public/dist/production.js'
@@ -38,7 +43,12 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'public/dist/production.min.js': ['public/dist/production.js', 'public/lib/*.js']
+          'public/dist/production.min.js': ['public/dist/production.js']
+        }
+      },
+      dep: {
+        files: {
+          'public/dist/dependencies.min.js': ['public/dist/dependencies.js']
         }
       }
     },

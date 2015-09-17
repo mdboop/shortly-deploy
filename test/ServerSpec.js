@@ -30,6 +30,13 @@ var Link = require('../app/models/link');
       });
   });
 
+  describe('test', function() {
+
+    it('asserts true is true', function() {
+      expect(true).to.be(true);
+    });
+  });
+
   describe('Link creation: ', function() {
 
     it('Only shortens valid urls, returning a 404 - Not found for invalid urls', function(done) {
