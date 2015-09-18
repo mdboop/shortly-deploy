@@ -1,6 +1,11 @@
+var http = require('http');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test');
+var uristring = process.env.MONGOLAB_URI || 
+                process.env.MONGOHQ_URL ||
+                'mongodb://localhost/test';
+
+mongoose.connect(uristring);
 
 var db = mongoose.connection;
 
